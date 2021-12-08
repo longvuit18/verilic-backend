@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "module": "commonjs",
+        "target": "es5",
+        "lib": [
+            "ES2020"
+        ],
+        "alwaysStrict": true,
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "resolveJsonModule": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+        "allowJs": true,
+        "sourceMap": true
+    },
+    "compileOnSave": true,
+    "include": [
+        "./src/**/*.ts",
+        "./src/**/*.tsx"
+    ]
+}

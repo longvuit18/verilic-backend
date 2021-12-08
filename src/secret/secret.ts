@@ -1,0 +1,1 @@
+export const secretKey = process.env.SECRET_KEY ?? "genS-Secret-Key-123-1811-2000";
