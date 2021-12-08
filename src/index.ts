@@ -6,9 +6,7 @@ import http from "http";
 import { auth } from "./middleware/auth";
 import { login } from "./routes/login";
 import { logout } from "./routes/logout";
-import { requirementRouterPrivate } from "./routes/private/requirement";
 import { userRouterPrivate } from "./routes/private/user";
-import { requirementRouterPublic } from "./routes/public/requirement";
 import { userRouterPublic } from "./routes/public/user";
 import { registerForUser } from "./routes/register";
 
@@ -49,14 +47,12 @@ export const server = http.createServer(app);
  */
 
 app.use("/auth/user", userRouterPrivate);
-app.use("/auth/requirement", requirementRouterPrivate);
 /**
  * Public routes
  * 
  */
 app.use("/public", express.static("public"));
 
-app.use("/requirement", requirementRouterPublic);
 app.use("/user", userRouterPublic);
 
 app.post("/login", login);

@@ -1,5 +1,4 @@
 import { MongoDb } from "./mongo";
-import { requirements } from "./seeds/requirement";
 import { users } from "./seeds/users";
 
 export const migrate = async (dropCollections = true, createIndexes = true): Promise<void> => {
@@ -11,7 +10,6 @@ export const migrate = async (dropCollections = true, createIndexes = true): Pro
 			console.info("--dropCollections found!");
 			try {
 				await db.__db.dropCollection(db.users.collectionName);
-				await db.__db.dropCollection(db.requirements.collectionName);
 
 				// TODO: add other collections;
 			}
@@ -22,18 +20,14 @@ export const migrate = async (dropCollections = true, createIndexes = true): Pro
 		}
 
 		const usersResult = await db.users.insertMany(users);
-		const requirementsResult = await db.requirements.insertMany(requirements);
 		console.info(`${usersResult.insertedCount} entries added to users!`);
-		console.info(`${requirementsResult.insertedCount} entries added to requirements!`);
 
 		console.info("createIndexes: " + createIndexes);
 
 		if (createIndexes === true) {
 
 			const usersIndexes = await db.users.createIndex({ address: "text" });
-			const requirementsIndexes = await db.requirements.createIndex({ classAddress: "text" });
 			console.log("usersIndexes: ", usersIndexes);
-			console.log("requirementsIndexes: ", requirementsIndexes);
 		}
 	} catch (e) {
 		console.error(e);

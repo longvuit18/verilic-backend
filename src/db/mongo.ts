@@ -1,6 +1,5 @@
 import { Collection, Db, MongoClient } from "mongodb";
 import { dbConfig } from "./config";
-import { RequirementEntity } from "./DataEntities/RequirementEntity";
 import { UserEntity } from "./DataEntities/UserEntity";
 
 interface IDataStore {
@@ -8,7 +7,6 @@ interface IDataStore {
 	__db: Db;
 
 	users: Collection<UserEntity>;
-	requirements: Collection<RequirementEntity>
 }
 
 // singleton pattern for mongodb with typescript
@@ -30,11 +28,9 @@ export class MongoDb {
 			const db = client.db(dbConfig.mongoDb.dbName);
 
 			const users = db.collection<UserEntity>(`${dbConfig.mongoDb.sysPrefix}users`);
-			const requirements = db.collection<RequirementEntity>(`${dbConfig.mongoDb.sysPrefix}requirements`);
 			return {
 				__client: client,
 				__db: db,
-				requirements,
 
 				users,
 			};
